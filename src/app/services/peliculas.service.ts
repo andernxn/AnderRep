@@ -24,4 +24,8 @@ export class PeliculasService {
     const headers = new HttpHeaders({'Content-Type': 'aplication/json'});
     return this.http.post(`${this.URL_LARAVEL}/api/crearPelicula`, pelicula, {headers: headers});
   }
+
+  eliminar(id: number) {
+    return this.http.delete(`${this.URL_LARAVEL}/api/eliminarPelicula/${id}`);
+  }
 }

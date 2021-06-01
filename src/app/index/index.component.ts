@@ -26,4 +26,10 @@ export class IndexComponent implements OnInit {
       if(data) this.peliculas = data;
     });
   }
+
+  eliminar(id: number) {
+    this.peliculasService.eliminar(id).subscribe((data:any) => {
+      console.log(data);
+    })
+  }
 }
