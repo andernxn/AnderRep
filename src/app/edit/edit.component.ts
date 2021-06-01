@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
 import { Pelicula } from '../models/pelicula';
 import { PeliculasService } from '../services/peliculas.service';
@@ -25,11 +25,12 @@ export class EditComponent implements OnInit {
 
   id:number = 0;
 
-  constructor(private peliculasService: PeliculasService, private activatedRoute: ActivatedRoute) {
-    activatedRoute.params.subscribe(params => {
+  constructor(private peliculasService: PeliculasService, private activatedRoute: ActivatedRoute, private router: Router) {
+    this.activatedRoute.params.subscribe(params => {
       this.id = params['id'];
       this.obtenerPelicula(this.id);
     });
+
   }
 
   ngOnInit(): void {}
@@ -39,5 +40,13 @@ export class EditComponent implements OnInit {
       if(data) this.pelicula = data;
     });
   }
+
+  editar(pelicula: Pelicula) {
+    this.peliculasService.editar(pelicula).subscribe((data:any) => {
+      console.log(data);
+      if(data) this.router.navigateByUrl('/');
+    })
+  }
+
 
 }

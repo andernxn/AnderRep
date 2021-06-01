@@ -10,7 +10,7 @@ export class PeliculasService {
 
   URL_LARAVEL = environment.URL_LARAVEL;
 
-  constructor( private http: HttpClient) {}
+  constructor( private http: HttpClient) { }
 
   buscar(query: string) {
     return this.http.get(`${this.URL_LARAVEL}/api/buscarPelicula`, {params: {nombre: query}});
@@ -27,5 +27,10 @@ export class PeliculasService {
 
   eliminar(id: number) {
     return this.http.delete(`${this.URL_LARAVEL}/api/eliminarPelicula/${id}`);
+  }
+
+  editar(pelicula: Pelicula) {
+    const headers = new HttpHeaders({'Content-Type': 'aplication/json'});
+    return this.http.put(`${this.URL_LARAVEL}/api/actualizarPelicula/${pelicula.id}`, pelicula, {headers: headers});
   }
 }
