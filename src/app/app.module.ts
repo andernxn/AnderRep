@@ -8,11 +8,17 @@ import { HttpClientModule } from '@angular/common/http';
 import { IndexComponent } from './index/index.component';
 import { Route, RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { ShowComponent } from './show/show.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
+import { FooterComponent } from './components/footer/footer.component';
 
-const routes: Route[] = [{ path: '', component: IndexComponent }];
+const routes: Route[] = [
+  { path: '', component: IndexComponent },
+  { path: 'show/:id', component: ShowComponent },
+];
 
 @NgModule({
-  declarations: [AppComponent, IndexComponent],
+  declarations: [AppComponent, IndexComponent, ShowComponent, NavbarComponent, FooterComponent],
   imports: [
     BrowserModule,
     RouterModule.forRoot(routes),

@@ -13,15 +13,31 @@
 
 <body>
 
-    <nav class="navbar navbar-dark bg-dark justify-content-between">
-        <div class="container">
-            <a class="navbar-brand">Movies Site</a>
-            <div class="form-group row">
-                <div class="col-sm-6">
-                    <input class="form-control" name="buscar" placeholder="Buscar..." [(ngModel)]="query">
-                </div>
-                <div class="col-sm-6">
-                    <button class="btn btn-outline-success" (click)="buscar()"> Buscar</button>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">
+                <img src="./assets/camara-de-video.png" width="30" height="25" class="d-inline-block align-text-top">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
+                aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#">Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Crear Película</a>
+                    </li>
+                </ul>
+                <div class="form-group row">
+                    <div class="col-sm-6">
+                        <input class="form-control" name="buscar" placeholder="Buscar..." [(ngModel)]="query">
+                    </div>
+                    <div class="col-sm-6">
+                        <button class="btn btn-outline-success" (click)="buscar()"> Buscar</button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -30,7 +46,7 @@
     <section class="py-5 text-center container">
         <div class="row py-lg-5">
             <div class="col-lg-6 col-md-8 mx-auto">
-                <h1 class="fw-light">Movies Site</h1>
+                <h1 class="fw-light"> <strong>MOVIES SITE</strong> </h1>
                 <p class="lead text-muted">Something short and leading about the collection below—its contents, the
                     creator, etc. Make it short and sweet, but not too short so folks don’t simply skip over it
                     entirely.
@@ -41,28 +57,34 @@
 
     <div class="album py-5 bg-light">
         <div class="container">
-            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+            <div class='row text-center' *ngIf='peliculas.length === 0'>
+                <div class='col-md-12'>
+                    <img class="img w-50 p-3" src="./assets/no_file.png">
+                    <h3 class='text-muted'>
+                        No hay películas ...
+                    </h3>
+                </div>
+            </div>
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-4">
                 <div class="col" *ngFor="let pelicula of peliculas">
                     <div class="card shadow-sm">
-                        <img src="http://127.0.0.1:8000/api/uploads/{{pelicula.id}}" width="100%" height="350">
+                        <img src="{{URL_LARAVEL}}/api/uploads/{{pelicula.id}}" width="100%" height="350">
 
                         <div class="card-body">
                             <div class="align-items-center text-center">
-                                <a href="" class="btn btn-secondary btn-lg btn-block">{{pelicula.nombre}}</a>
-                                <br>
-                                <small class="text-muted">{{pelicula.anio}}</small>
+                                <a routerLink="/show/{{pelicula.id}}" class="btn btn-secondary btn-lg btn-block">{{pelicula.nombre}}</a>
                             </div>
                             <br>
-                            <p class="card-text"> <strong> Descripción: </strong> {{pelicula.descripcion}}</p>
-                            <p class="card-text"> <strong> Género: </strong> {{pelicula.genero}} </p>
+                            <small class="text-muted">{{pelicula.descripcion}}</small>
+                            <br><br>
                             <div class="d-flex justify-content-between align-items-center">
                                 <div class="btn-group">
-
                                     <button type="button" class="btn btn-sm btn-outline-primary"><i
                                             class="fa fa-marker"></i></button>
                                     <button type="button" class="btn btn-sm btn-outline-danger"><i
                                             class="fa fa-trash-alt"></i></button>
                                 </div>
+                                <small class="text-muted">{{pelicula.anio}}</small>
                                 <small class="text-muted">{{pelicula.duracion}}</small>
                             </div>
                         </div>
@@ -72,11 +94,7 @@
         </div>
     </div>
 
-    <footer class="text-muted py-5">
-        <div class="container">
-            <p class="mb-1 text-center"> Sitio desarrollado por Anderson Portilla y Diego Bolaños</p>
-        </div>
-    </footer>
+    <app-footer></app-footer>
 
 </body>
 
