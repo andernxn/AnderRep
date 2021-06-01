@@ -11,14 +11,16 @@ import { FormsModule } from '@angular/forms';
 import { ShowComponent } from './show/show.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { FooterComponent } from './components/footer/footer.component';
+import { CreateComponent } from './create/create.component';
 
 const routes: Route[] = [
   { path: '', component: IndexComponent },
   { path: 'show/:id', component: ShowComponent },
+  { path: 'create', component: CreateComponent }
 ];
 
 @NgModule({
-  declarations: [AppComponent, IndexComponent, ShowComponent, NavbarComponent, FooterComponent],
+  declarations: [AppComponent, IndexComponent, ShowComponent, NavbarComponent, FooterComponent, CreateComponent],
   imports: [
     BrowserModule,
     RouterModule.forRoot(routes),
