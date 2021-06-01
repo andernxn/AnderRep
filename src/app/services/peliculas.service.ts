@@ -6,11 +6,9 @@ import {HttpClient} from '@angular/common/http';
 })
 export class PeliculasService {
 
-  constructor( private http: HttpClient) {
-    
-  }
+  constructor( private http: HttpClient) {}
 
-  getPeliculas() {
-    return this.http.get('http://127.0.0.1:8000/api/obtenerPeliculas');
+  buscar(query: string) {
+    return this.http.get('http://127.0.0.1:8000/api/buscarPelicula', {params: {nombre: query}});
   }
 }
